@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BlitzMed - Emergency Ambulance Service</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h1>BlitzMed Emergency Service</h1>
+    <div class="plus-sign" onclick="showEmergencyPage()">+</div>
+    <p>Call Ambulance</p>
+    
+    <div id="emergencyPage" class="hidden">
+        <h2>Emergency Details</h2>
+        <label for="symptoms">Describe Symptoms (Optional):</label><br>
+        <textarea id="symptoms" rows="4" cols="30"></textarea><br>
+        <h3>First Aid Guide</h3>
+        <p>- Keep the patient calm and still.</p>
+        <p>- Apply pressure to bleeding wounds.</p>
+        <p>- Do not move injured body parts unnecessarily.</p>
+        <p>- Provide CPR if necessary and trained.</p>
+        <br>
+        <button class="option" onclick="goBack()">Back</button>
+    </div>
+    
+    <div class="options">
+        <a href="settings.html" class="option">Settings</a>
+        <a href="schedule.html" class="option">Schedule Ambulance</a>
+        <a href="nurse.html" class="option">Home Nurse Care</a>
+        <a href="equipment.html" class="option">Medical Equipment</a>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
