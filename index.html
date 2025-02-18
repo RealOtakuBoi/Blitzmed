@@ -7,6 +7,14 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <button class="menu-button" onclick="toggleMenu()">☰</button>
+    <div class="sidebar" id="sidebar">
+        <a href="settings.html">Settings</a>
+        <a href="schedule.html">Schedule Ambulance</a>
+        <a href="nurse.html">Home Nurse Care</a>
+        <a href="equipment.html">Medical Equipment</a>
+    </div>
+    
     <h1>BlitzMed Emergency Service</h1>
     <div class="plus-sign" onclick="showEmergencyPage()">+</div>
     <p>Call Ambulance</p>
@@ -24,13 +32,7 @@
         <button class="option" onclick="goBack()">Back</button>
     </div>
     
-    <div class="options">
-        <a href="settings.html" class="option">Settings</a>
-        <a href="schedule.html" class="option">Schedule Ambulance</a>
-        <a href="nurse.html" class="option">Home Nurse Care</a>
-        <a href="equipment.html" class="option">Medical Equipment</a>
-    </div>
-
-    <script src="script.js"></script>
+    <script src="script.js">
+    </script>
 </body>
 </html>
