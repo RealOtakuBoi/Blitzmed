@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BlitzMed - Settings</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+            background-color: #ffffff;
+            color: #d32f2f;
+        }
+        .container {
+            width: 90%;
+            max-width: 400px;
+            margin: 20px auto;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        h2 {
+            margin-bottom: 20px;
+        }
+        label {
+            display: block;
+            font-weight: bold;
+            margin-top: 10px;
+            text-align: left;
+        }
+        select, input {
+            width: 100%;
+            padding: 8px;
+            margin-top: 5px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        button {
+            margin-top: 20px;
+            padding: 10px;
+            width: 100%;
+            background-color: #d32f2f;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background 0.3s;
+        }
+        button:hover {
+            background-color: #b71c1c;
+        }
+        .back-link {
+            display: block;
+            margin-top: 15px;
+            color: #d32f2f;
+            text-decoration: none;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Settings & Preferences</h2>
+        
+        <label for="hospital">Preferred Hospital:</label>
+        <select id="hospital">
+            <option value="hospital1">Hospital A</option>
+            <option value="hospital2">Hospital B</option>
+            <option value="hospital3">Hospital C</option>
+        </select>
+        
+        <label for="insurance">Insurance Plan:</label>
+        <select id="insurance">
+            <option value="plan1">Plan 1</option>
+            <option value="plan2">Plan 2</option>
+            <option value="plan3">Plan 3</option>
+        </select>
+        
+        <label for="history">Medical History (Optional):</label>
+        <input type="text" id="history" placeholder="e.g., Diabetes, Hypertension">
+        
+        <button onclick="saveSettings()">Save Preferences</button>
+        
+        <a href="index.html" class="back-link">Back to Home</a>
+    </div>
+    
+    <script>
+        function saveSettings() {
+            const hospital = document.getElementById('hospital').value;
+            const insurance = document.getElementById('insurance').value;
+            const history = document.getElementById('history').value;
+            
+            alert('Preferences Saved!\nHospital: ' + hospital + '\nInsurance: ' + insurance + '\nMedical History: ' + history);
+        }
+    </script>
+</body>
+</html>
