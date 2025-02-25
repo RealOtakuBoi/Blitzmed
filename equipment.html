@@ -48,20 +48,20 @@
             height: 100px;
             margin-bottom: 10px;
         }
-        .back-button {
-            display: block;
+        .back-btn {
+            display: inline-block;  
+            text-align: center;  
             margin: 20px auto;
             padding: 10px 20px;
             background-color: #b71c1c;
             color: white;
-            border: none;
-            cursor: pointer;
+            text-decoration: none; 
+            font-weight: bold; 
             border-radius: 5px;
             transition: 0.3s;
         }
-        .back-button:hover {
-            background-color: #d32f2f;
-        }
+        .back-btn:hover {
+            background-color: #d32f2f;        }
     </style>
 </head>
 <body>
@@ -88,6 +88,7 @@
             <p>₹15,000</p>
         </div>
     </div>
+    <a href="index.html" class="back-btn">Back to Home</a>
     
     <div id="productInfo" class="product-info">
         <h2 id="productName"></h2>
