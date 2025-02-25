@@ -7,92 +7,110 @@
     <style>
         body {
             font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 20px;
             background-color: #ffffff;
             color: #d32f2f;
             text-align: center;
+            margin: 0;
+            padding: 20px;
         }
         .container {
             display: flex;
             flex-wrap: wrap;
             justify-content: center;
-            gap: 20px;
         }
         .card {
-            background: #f8f9fa;
+            border: 2px solid #d32f2f;
+            border-radius: 10px;
             padding: 15px;
-            border-radius: 8px;
-            width: 250px;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-            text-align: center;
-        }
-        .card img {
-            width: 100%;
-            height: 150px;
-            background: #ddd;
-            border-radius: 5px;
-        }
-        .title {
-            font-size: 18px;
-            font-weight: bold;
-            margin: 10px 0;
-        }
-        .description {
-            font-size: 14px;
-            color: #555;
-        }
-        .price {
-            font-size: 16px;
-            font-weight: bold;
-            color: #d32f2f;
-            margin-top: 10px;
-        }
-
-        .back-btn {
-            display: block;
+            margin: 15px;
             width: 200px;
-            margin: 20px auto;
-            padding: 10px;
-            background-color: #d32f2f;
-            color: white;
-            text-decoration: none;
-            border-radius: 5px;
             text-align: center;
+            cursor: pointer;
+            transition: 0.3s;
+            background-color: white;
         }
-        .back-btn:hover {
+        .card:hover {
+            box-shadow: 0 0 10px #d32f2f;
+        }
+        .hidden {
+            display: none;
+        }
+        .product-info {
+            border: 2px solid #d32f2f;
+            border-radius: 10px;
+            padding: 20px;
+            margin-top: 20px;
+            background-color: white;
+            display: none;
+        }
+        .product-image {
+            width: 100px;
+            height: 100px;
+            margin-bottom: 10px;
+        }
+        .back-button {
+            display: block;
+            margin: 20px auto;
+            padding: 10px 20px;
             background-color: #b71c1c;
+            color: white;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: 0.3s;
+        }
+        .back-button:hover {
+            background-color: #d32f2f;
         }
     </style>
 </head>
 <body>
     <h1>Medical Equipment</h1>
     <div class="container">
-        <div class="card">
-            <img src="" alt="Equipment Image">
-            <div class="title">Wheelchair</div>
-            <div class="description">Comfortable and durable wheelchair for mobility support.</div>
-            <div class="price">₹5,000</div>
+        <div class="card" onclick="showProduct('Oxygen Cylinder', 'Essential for patients with respiratory issues.', '₹5,000','https://m.media-amazon.com/images/I/41V-s2CDhTS.jpg')">
+            <img src="https://m.media-amazon.com/images/I/41V-s2CDhTS.jpg" alt="Oxygen Cylinder" class="product-image">
+            <h3>Oxygen Cylinder</h3>
+            <p>₹5,000</p>
         </div>
-        <div class="card">
-            <img src="" alt="Equipment Image">
-            <div class="title">Oxygen Cylinder</div>
-            <div class="description">Portable oxygen cylinder for respiratory support.</div>
-            <div class="price">₹8,500</div>
+        <div class="card" onclick="showProduct('Wheelchair', 'Comfortable and durable wheelchair.', '₹8,000','https://m.media-amazon.com/images/I/71D0e-U4vML.jpg')">
+            <img src="https://m.media-amazon.com/images/I/71D0e-U4vML.jpg" alt="Wheelchair" class="product-image">
+            <h3>Wheelchair</h3>
+            <p>₹8,000</p>
         </div>
-        <div class="card">
-            <img src="" alt="Equipment Image">
-            <div class="title">Blood Pressure Monitor</div>
-            <div class="description">Digital monitor for accurate blood pressure readings.</div>
-            <div class="price">₹1,200</div>
+        <div class="card" onclick="showProduct('Nebulizer', 'Effective for treating asthma and other conditions.', '₹3,000','https://m.media-amazon.com/images/I/51M0BzGV5WL.jpg')">
+            <img src="https://m.media-amazon.com/images/I/51M0BzGV5WL.jpg" alt="Nebulizer" class="product-image">
+            <h3>Nebulizer</h3>
+            <p>₹3,000</p>
         </div>
-        <div class="card">
-            <img src="" alt="Equipment Image">
-            <div class="title">Nebulizer</div>
-            <div class="description">Effective medication delivery for respiratory conditions.</div>
-            <div class="price">₹2,000</div>
+        <div class="card" onclick="showProduct('Hospital Bed', 'Adjustable bed for patient comfort.', '₹15,000','https://images-cdn.ubuy.co.in/6700040c574c0b0d2a19d7b2-point-a-pam-3-premium-3-function-full.jpg')">
+            <img src="https://images-cdn.ubuy.co.in/6700040c574c0b0d2a19d7b2-point-a-pam-3-premium-3-function-full.jpg" alt="Hospital Bed" class="product-image">
+            <h3>Hospital Bed</h3>
+            <p>₹15,000</p>
         </div>
     </div>
-    <a href="index.html" class="back-btn">Back to Home</a>
+    
+    <div id="productInfo" class="product-info">
+        <h2 id="productName"></h2>
+        <img src="" alt="Product Image" class="product-image" id="productImage">
+        <p id="productDesc"></p>
+        <p id="productPrice"></p>
+        <button class="back-button" onclick="goBack()">Back to Home</button>
+    </div>
+    
+    <script>
+        function showProduct(name, description, price,imageSrc) {
+            document.querySelector('.container').style.display = 'none';
+            document.getElementById('productInfo').style.display = 'block';
+            document.getElementById('productName').innerText = name;
+            document.getElementById('productDesc').innerText = description;
+            document.getElementById('productPrice').innerText = price;
+            document.getElementById('productImage').src = imageSrc;
+            document.getElementById('productImage').alt = name;
+        }
+        function goBack() {
+            document.querySelector('.container').style.display = 'flex';
+            document.getElementById('productInfo').style.display = 'none';
+        }
+    </script>
 </body>
 </html>
