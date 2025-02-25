@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home Nurse Care - BlitzMed</title>
+    <style>
+        /* General Styling */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f8f8;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        /* Container */
+        .container {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+            text-align: center;
+            width: 90%;
+            max-width: 400px;
+        }
+
+        /* Title */
+        .title {
+            color: #b71c1c;
+            font-size: 24px;
+            margin-bottom: 15px;
+        }
+
+        /* Form Styling */
+        .nurse-form {
+            display: flex;
+            flex-direction: column;
+            text-align: left;
+        }
+
+        .nurse-form label {
+            font-weight: bold;
+            margin: 10px 0 5px;
+        }
+
+        .nurse-form input, .nurse-form select {
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+            width: 100%;
+        }
+
+        /* Submit Button */
+        .submit-btn {
+            background-color: #b71c1c;
+            color: white;
+            padding: 10px;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+            border-radius: 5px;
+            margin-top: 15px;
+            transition: 0.3s;
+        }
+
+        .submit-btn:hover {
+            background-color: #d32f2f;
+        }
+
+        /* Back Button */
+        .back-btn {
+            display: inline-block;
+            margin-top: 15px;
+            padding: 10px 20px;
+            background-color: #b71c1c;
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            border-radius: 5px;
+            transition: 0.3s;
+        }
+
+        .back-btn:hover {
+            background-color: #d32f2f;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="title">Request Home Nurse Care</h1>
+
+        <form class="nurse-form">
+            <label for="name">Your Name</label>
+            <input type="text" id="name" name="name" placeholder="Enter your name" required>
+
+            <label for="phone">Contact Number</label>
+            <input type="tel" id="phone" name="phone" placeholder="Enter your phone number" required>
+
+            <label for="address">Home Address</label>
+            <input type="text" id="address" name="address" placeholder="Enter your address" required>
+
+            <label for="nurse-type">Type of Care</label>
+            <select id="nurse-type" name="nurse-type" required>
+                <option value="" disabled selected>Select care type</option>
+                <option value="general">General Nursing</option>
+                <option value="elderly">Elderly Care</option>
+                <option value="post-surgery">Post-Surgery Care</option>
+                <option value="palliative">Palliative Care</option>
+            </select>
+
+            <label for="time">Preferred Start Date</label>
+            <input type="date" id="time" name="time" required>
+
+            <button type="submit" class="submit-btn">Request Now</button>
+        </form>
+
+        <a href="index.html" class="back-btn">Back to Home</a>
+    </div>
+</body>
+</html>
