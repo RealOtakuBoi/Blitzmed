@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Schedule Ambulance - BlitzMed</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f8f8;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .container {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+            text-align: center;
+            width: 90%;
+            max-width: 400px;
+        }
+
+        .title {
+            color: #b71c1c;
+            font-size: 24px;
+            margin-bottom: 15px;
+        }
+
+        .ambulance-form {
+            display: flex;
+            flex-direction: column;
+            text-align: left;
+        }
+
+        .ambulance-form label {
+            font-weight: bold;
+            margin: 10px 0 5px;
+        }
+
+        .ambulance-form input {
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+            width: 100%;
+        }
+
+        .submit-btn {
+            background-color: #b71c1c;
+            color: white;
+            padding: 10px;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+            border-radius: 5px;
+            margin-top: 15px;
+            transition: 0.3s;
+        }
+
+        .submit-btn:hover {
+            background-color: #d32f2f;
+        }
+
+        .back-btn {
+            display: inline-block;
+            margin-top: 15px;
+            padding: 10px 20px;
+            background-color: #b71c1c;
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            border-radius: 5px;
+            transition: 0.3s;
+        }
+
+        .back-btn:hover {
+            background-color: #d32f2f;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="title">Schedule an Ambulance</h1>
+
+        <form class="ambulance-form">
+            <label for="name">Your Name</label>
+            <input type="text" id="name" name="name" placeholder="Enter your name" required>
+
+            <label for="phone">Contact Number</label>
+            <input type="tel" id="phone" name="phone" placeholder="Enter your phone number" required>
+
+            <label for="pickup">Pickup Location</label>
+            <input type="text" id="pickup" name="pickup" placeholder="Enter pickup location" required>
+
+            <label for="destination">Destination Hospital</label>
+            <input type="text" id="destination" name="destination" placeholder="Enter hospital name" required>
+
+            <label for="time">Preferred Time</label>
+            <input type="datetime-local" id="time" name="time" required>
+
+            <button type="submit" class="submit-btn">Schedule Now</button>
+        </form>
+
+        <a href="index.html" class="back-btn">Back to Home</a>
+    </div>
+</body>
+</html>
