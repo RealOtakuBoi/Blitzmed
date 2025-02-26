@@ -21,14 +21,18 @@
     
     <div id="emergencyPage" class="hidden">
         <h2>Emergency Details</h2>
-        <label for="symptoms">Describe Symptoms (Optional):</label><br>
-        <textarea id="symptoms" rows="4" cols="30"></textarea><br>
-        <button type="submit" class="submit-btn">Get First Aid</button>
+        <form id="typing-form">
+            <label for="symptoms">Describe Symptoms (Optional):</label><br>
+            <textarea id="symptoms" class="typing-input" rows="4" cols="30"></textarea><br>
+            <button type="submit" class="submit-btn">Get First Aid</button>
+        </form>
+
         <h3>First Aid Guide</h3>
-        <p>- Keep the patient calm and still.</p>
-        <p>- Apply pressure to bleeding wounds.</p>
-        <p>- Do not move injured body parts unnecessarily.</p>
-        <p>- Provide CPR if necessary and trained.</p>
+        <div id="firstAidGuide">
+            <p>- Keep the patient calm and still.</p>
+            <p>- Apply pressure to bleeding wounds.</p>
+            <p>- Do not move injured body parts unnecessarily.</p>
+        </div>
         <br>
         <button class="option" onclick="goBack()">Back</button>
     </div>
