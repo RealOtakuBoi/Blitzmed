@@ -4,7 +4,104 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>BlitzMed - Emergency Ambulance Service</title>
-    <link rel="stylesheet" href="style.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+            background-color: #ffffff;
+            color: #d32f2f;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        h1 {
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+        .menu-button {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            font-size: 24px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            color: #d32f2f;
+        }
+        .sidebar {
+            position: fixed;
+            top: 0;
+            left: -250px;
+            width: 250px;
+            height: 100%;
+            background: #d32f2f;
+            color: white;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding-top: 50px;
+            transition: left 0.3s;
+        }
+        .sidebar a {
+            color: white;
+            text-decoration: none;
+            padding: 10px;
+            font-size: 18px;
+            display: block;
+            width: 100%;
+            text-align: center;
+        }
+        .sidebar a:hover {
+            background: #b71c1c;
+        }
+        .plus-sign {
+            font-size: 120px;
+            font-weight: bold;
+            cursor: pointer;
+            line-height: 1;
+            color: #d32f2f;
+            transition: transform 0.2s;
+        }
+        .plus-sign:hover {
+            transform: scale(1.1);
+            color: #b71c1c;
+        }
+        p {
+            font-size: 18px;
+            font-weight: bold;
+            margin-top: 10px;
+        }
+        .hidden {
+            display: none;
+        }
+        .submit-btn {
+            background-color: #b71c1c;
+            color: white;
+            padding: 10px;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+            border-radius: 5px;
+            margin-top: 15px;
+            transition: 0.3s;
+        }
+        .submit-btn:hover {
+            background-color: #d32f2f;
+        }
+        .symptoms-list {
+            text-align: left;
+            margin: 10px 0;
+        }
+        .symptoms-list label {
+            display: block;
+            margin: 5px 0;
+        }
+    </style>
 </head>
 <body>
     <button class="menu-button" onclick="toggleMenu()">☰</button>
@@ -22,8 +119,20 @@
     <div id="emergencyPage" class="hidden">
         <h2>Emergency Details</h2>
         <form id="typing-form">
-            <label for="symptoms">Describe Symptoms (Optional):</label><br>
-            <textarea id="symptoms" class="typing-input" rows="4" cols="30"></textarea><br>
+            <label>Select Symptoms:</label>
+            <div class="symptoms-list">
+                <label><input type="checkbox" value="Severe Bleeding"> Severe Bleeding</label>
+                <label><input type="checkbox" value="Breathing Difficulty"> Breathing Difficulty</label>
+                <label><input type="checkbox" value="Chest Pain"> Chest Pain</label>
+                <label><input type="checkbox" value="Unconsciousness"> Unconsciousness</label>
+                <label><input type="checkbox" value="Fracture or Broken Bone"> Fracture or Broken Bone</label>
+                <label><input type="checkbox" value="Burns or Electric Shock"> Burns or Electric Shock</label>
+                <label><input type="checkbox" value="Seizure"> Seizure</label>
+            </div>
+
+            <label for="extra-symptoms">Other Symptoms (Optional):</label>
+            <input type="text" id="extra-symptoms" placeholder="Describe symptoms..."><br>
+
             <button type="submit" class="submit-btn">Get First Aid</button>
         </form>
 
@@ -36,8 +145,67 @@
         <br>
         <button class="option" onclick="goBack()">Back</button>
     </div>
-    
-    <script src="script.js">
+
+    <script>
+        function toggleMenu() {
+            const sidebar = document.getElementById('sidebar');
+            sidebar.style.left = (sidebar.style.left === "0px") ? "-250px" : "0px";
+        }
+
+        function showEmergencyPage() {
+            document.querySelector('.plus-sign').style.display = 'none';
+            document.querySelector('p').style.display = 'none';
+            document.getElementById('emergencyPage').classList.remove('hidden');
+        }
+
+        function goBack() {
+            document.getElementById('emergencyPage').classList.add('hidden');
+            document.querySelector('.plus-sign').style.display = 'block';
+            document.querySelector('p').style.display = 'block';
+        }
+
+        const API_KEY = "AIzaSyAKy7lM2uhCBtyRHtR3japozfk_vusALp4";
+        const API_URL = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${API_KEY}`;
+
+        document.getElementById("typing-form").addEventListener("submit", async (e) => {
+            e.preventDefault();
+
+            const selectedSymptoms = Array.from(document.querySelectorAll(".symptoms-list input:checked"))
+                .map(checkbox => checkbox.value)
+                .join(", ");
+
+            const extraSymptoms = document.getElementById("extra-symptoms").value.trim();
+
+            if (!selectedSymptoms && !extraSymptoms) {
+                alert("Please select or enter at least one symptom for first aid guidance.");
+                return;
+            }
+
+            const symptomsText = selectedSymptoms + (extraSymptoms ? `, ${extraSymptoms}` : "");
+            const userMessage = "First aid in 3 key points excluding medical attention for: {Consider all the factors} " + symptomsText;
+
+            try {
+                const response = await fetch(API_URL, {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({
+                        contents: [{
+                            role: "user",
+                            parts: [{ text: userMessage }]
+                        }]
+                    })
+                });
+
+                const data = await response.json();
+                const responseText = data.candidates[0].content.parts[0].text.replace(/\*\*([^*]+)\*\*/g, "$1").trim();
+                
+                document.getElementById("firstAidGuide").innerHTML = responseText.split("\n").map(point => `<p>${point}</p>`).join("");
+
+            } catch (error) {
+                console.log(error);
+                alert("Failed to fetch first aid details. Please try again.");
+            }
+        });
     </script>
 </body>
 </html>
