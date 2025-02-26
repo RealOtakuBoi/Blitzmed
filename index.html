@@ -182,7 +182,7 @@
             }
 
             const symptomsText = selectedSymptoms + (extraSymptoms ? `, ${extraSymptoms}` : "");
-            const userMessage = "First aid in 3 key points excluding medical attention for: {Consider all the factors} " + symptomsText;
+            const userMessage = "Given in angular brackets are the symptoms of a critical patient who has already called an ambulance. Analyze his symptoms step by step and provide only step by step guidance for first aid. Give your response in the {format Remain CALM, here is the necessary first aid (next line)1. (next line)2.}" + "<" + symptomsText + ">";
 
             try {
                 const response = await fetch(API_URL, {
