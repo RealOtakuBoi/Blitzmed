@@ -1,211 +1,278 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>BlitzMed - Emergency Ambulance Service</title>
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            text-align: center;
-            margin: 0;
-            padding: 0;
-            background-color: #ffffff;
-            color: #d32f2f;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-        }
-        h1 {
-            font-size: 18px;
-            font-weight: bold;
-            margin-bottom: 20px;
-        }
-        .menu-button {
-            position: absolute;
-            top: 10px;
-            left: 10px;
-            font-size: 24px;
-            background: none;
-            border: none;
-            cursor: pointer;
-            color: #d32f2f;
-        }
-        .sidebar {
-            position: fixed;
-            top: 0;
-            left: -250px;
-            width: 250px;
-            height: 100%;
-            background: #d32f2f;
-            color: white;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            padding-top: 50px;
-            transition: left 0.3s;
-        }
-        .sidebar a {
-            color: white;
-            text-decoration: none;
-            padding: 10px;
-            font-size: 18px;
-            display: block;
-            width: 100%;
-            text-align: center;
-        }
-        .sidebar a:hover {
-            background: #b71c1c;
-        }
-        .plus-sign {
-            font-size: 120px;
-            font-weight: bold;
-            cursor: pointer;
-            line-height: 1;
-            color: #d32f2f;
-            transition: transform 0.2s;
-        }
-        .plus-sign:hover {
-            transform: scale(1.1);
-            color: #b71c1c;
-        }
-        p {
-            font-size: 18px;
-            font-weight: bold;
-            margin-top: 10px;
-        }
-        .hidden {
-            display: none;
-        }
-        .submit-btn {
-            background-color: #b71c1c;
-            color: white;
-            padding: 10px;
-            border: none;
-            cursor: pointer;
-            font-size: 16px;
-            border-radius: 5px;
-            margin-top: 15px;
-            transition: 0.3s;
-        }
-        .submit-btn:hover {
-            background-color: #d32f2f;
-        }
-        .symptoms-list {
-            text-align: left;
-            margin: 10px 0;
-        }
-        .symptoms-list label {
-            display: block;
-            margin: 5px 0;
-        }
+      body {
+        font-family: Arial, sans-serif;
+        text-align: center;
+        margin: 0;
+        padding: 0;
+        background-color: #ffffff;
+        color: #d32f2f;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+      }
+      h1 {
+        font-size: 18px;
+        font-weight: bold;
+        margin-bottom: 20px;
+      }
+      .menu-button {
+        position: absolute;
+        top: 10px;
+        left: 10px;
+        font-size: 24px;
+        background: none;
+        border: none;
+        cursor: pointer;
+        color: #d32f2f;
+      }
+      .sidebar {
+        position: fixed;
+        top: 0;
+        left: -250px;
+        width: 250px;
+        height: 100%;
+        background: #d32f2f;
+        color: white;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding-top: 50px;
+        transition: left 0.3s;
+      }
+      .sidebar a {
+        color: white;
+        text-decoration: none;
+        padding: 10px;
+        font-size: 18px;
+        display: block;
+        width: 100%;
+        text-align: center;
+      }
+      .sidebar a:hover {
+        background: #b71c1c;
+      }
+      .plus-sign {
+        font-size: 120px;
+        font-weight: bold;
+        cursor: pointer;
+        line-height: 1;
+        color: #d32f2f;
+        transition: transform 0.2s;
+      }
+      .plus-sign:hover {
+        transform: scale(1.1);
+        color: #b71c1c;
+      }
+      p {
+        font-size: 18px;
+        font-weight: bold;
+        margin-top: 10px;
+      }
+      .hidden {
+        display: none;
+      }
+      .submit-btn {
+        background-color: #b71c1c;
+        color: white;
+        padding: 10px;
+        border: none;
+        cursor: pointer;
+        font-size: 16px;
+        border-radius: 5px;
+        margin-top: 15px;
+        transition: 0.3s;
+      }
+      .submit-btn:hover {
+        background-color: #d32f2f;
+      }
+      .symptoms-list {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr); /* 3 columns */
+        gap: 10px; /* Spacing between items */
+        text-align: left;
+        margin: 10px 0;
+      }
+
+      .symptoms-list label {
+        display: flex;
+        align-items: center;
+        gap: 5px; /* Space between checkbox and label text */
+        font-size: 16px;
+        background: #f8d7da; /* Light red background */
+        padding: 5px;
+        border-radius: 5px;
+        cursor: pointer;
+      }
+
+      .symptoms-list input {
+        transform: scale(1.2); /* Make checkboxes slightly larger */
+      }
+
+      #map {
+        width: 100%;
+        height: 400px;
+        border-radius: 10px;
+        margin-top: 15px;
+        border: 2px solid #d32f2f;
+      }
     </style>
-</head>
-<body>
+  </head>
+  <body>
     <button class="menu-button" onclick="toggleMenu()">☰</button>
     <div class="sidebar" id="sidebar">
-        <a href="settings.html">Settings</a>
-        <a href="schedule.html">Schedule Ambulance</a>
-        <a href="nurse.html">Home Nurse Care</a>
-        <a href="equipment.html">Medical Equipment</a>
+      <a href="settings.html">Settings</a>
+      <a href="schedule.html">Schedule Ambulance</a>
+      <a href="nurse.html">Home Nurse Care</a>
+      <a href="equipment.html">Medical Equipment</a>
     </div>
-    
+
     <h1>BlitzMed Emergency Service</h1>
     <div class="plus-sign" onclick="showEmergencyPage()">+</div>
     <p>Call Ambulance</p>
-    
+
     <div id="emergencyPage" class="hidden">
-        <h2>Emergency Details</h2>
-        <form id="typing-form">
-            <label>Select Symptoms:</label>
-            <div class="symptoms-list">
-                <label><input type="checkbox" value="Severe Bleeding"> Severe Bleeding</label>
-                <label><input type="checkbox" value="Breathing Difficulty"> Breathing Difficulty</label>
-                <label><input type="checkbox" value="Chest Pain"> Chest Pain</label>
-                <label><input type="checkbox" value="Unconsciousness"> Unconsciousness</label>
-                <label><input type="checkbox" value="Fracture or Broken Bone"> Fracture or Broken Bone</label>
-                <label><input type="checkbox" value="Burns or Electric Shock"> Burns or Electric Shock</label>
-                <label><input type="checkbox" value="Seizure"> Seizure</label>
-            </div>
-
-            <label for="extra-symptoms">Other Symptoms (Optional):</label>
-            <input type="text" id="extra-symptoms" placeholder="Describe symptoms..."><br>
-
-            <button type="submit" class="submit-btn">Get First Aid</button>
-        </form>
-
-        <h3>First Aid Guide</h3>
-        <div id="firstAidGuide">
-            <p>- Keep the patient calm and still.</p>
-            <p>- Apply pressure to bleeding wounds.</p>
-            <p>- Do not move injured body parts unnecessarily.</p>
+      <h2>Emergency Details</h2>
+      <form id="typing-form">
+        <label>Select Symptoms:</label>
+        <div class="symptoms-list">
+          <label
+            ><input type="checkbox" value="Severe Bleeding" /> Severe
+            Bleeding</label
+          >
+          <label
+            ><input type="checkbox" value="Breathing Difficulty" /> Breathing
+            Difficulty</label
+          >
+          <label><input type="checkbox" value="Chest Pain" /> Chest Pain</label>
+          <label
+            ><input type="checkbox" value="Unconsciousness" />
+            Unconsciousness</label
+          >
+          <label
+            ><input type="checkbox" value="Fracture or Broken Bone" /> Fracture
+            or Broken Bone</label
+          >
+          <label
+            ><input type="checkbox" value="Burns or Electric Shock" /> Burns or
+            Electric Shock</label
+          >
+          <label><input type="checkbox" value="Seizure" /> Seizure</label>
         </div>
-        <br>
-        <button class="option" onclick="goBack()">Back</button>
+
+        <label for="extra-symptoms">Other Symptoms (Optional):</label>
+        <input
+          type="text"
+          id="extra-symptoms"
+          placeholder="Describe symptoms..."
+        /><br />
+
+        <button type="submit" class="submit-btn">Get First Aid</button>
+      </form>
+
+      <h3>First Aid Guide</h3>
+      <div id="firstAidGuide">
+        <p>- Keep the patient calm and still.</p>
+        <p>- Apply pressure to bleeding wounds.</p>
+        <p>- Do not move injured body parts unnecessarily.</p>
+      </div>
+      <h3>🚑 Live Ambulance Tracking</h3>
+      <div id="map"></div>
+      <br />
+      <button class="option" onclick="goBack()">Back</button>
     </div>
-
     <script>
-        function toggleMenu() {
-            const sidebar = document.getElementById('sidebar');
-            sidebar.style.left = (sidebar.style.left === "0px") ? "-250px" : "0px";
-        }
+      function toggleMenu() {
+        const sidebar = document.getElementById("sidebar");
+        sidebar.style.left = sidebar.style.left === "0px" ? "-250px" : "0px";
+      }
 
-        function showEmergencyPage() {
-            document.querySelector('.plus-sign').style.display = 'none';
-            document.querySelector('p').style.display = 'none';
-            document.getElementById('emergencyPage').classList.remove('hidden');
-        }
+      function showEmergencyPage() {
+        document.querySelector(".plus-sign").style.display = "none";
+        document.querySelector("p").style.display = "none";
+        document.getElementById("emergencyPage").classList.remove("hidden");
+      }
 
-        function goBack() {
-            document.getElementById('emergencyPage').classList.add('hidden');
-            document.querySelector('.plus-sign').style.display = 'block';
-            document.querySelector('p').style.display = 'block';
-        }
+      function goBack() {
+        document.getElementById("emergencyPage").classList.add("hidden");
+        document.querySelector(".plus-sign").style.display = "block";
+        document.querySelector("p").style.display = "block";
+      }
 
-        const API_KEY = "AIzaSyDmALtNoc_swkXQlIcl9ZaYZyEgcC1lYfI";
-        const API_URL = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${API_KEY}`;
+      const API_KEY = "AIzaSyDmALtNoc_swkXQlIcl9ZaYZyEgcC1lYfI";
+      const API_URL = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${API_KEY}`;
 
-        document.getElementById("typing-form").addEventListener("submit", async (e) => {
-            e.preventDefault();
+      document
+        .getElementById("typing-form")
+        .addEventListener("submit", async (e) => {
+          e.preventDefault();
 
-            const selectedSymptoms = Array.from(document.querySelectorAll(".symptoms-list input:checked"))
-                .map(checkbox => checkbox.value)
-                .join(", ");
+          const selectedSymptoms = Array.from(
+            document.querySelectorAll(".symptoms-list input:checked")
+          )
+            .map((checkbox) => checkbox.value)
+            .join(", ");
 
-            const extraSymptoms = document.getElementById("extra-symptoms").value.trim();
+          const extraSymptoms = document
+            .getElementById("extra-symptoms")
+            .value.trim();
 
-            if (!selectedSymptoms && !extraSymptoms) {
-                alert("Please select or enter at least one symptom for first aid guidance.");
-                return;
-            }
+          if (!selectedSymptoms && !extraSymptoms) {
+            alert(
+              "Please select or enter at least one symptom for first aid guidance."
+            );
+            return;
+          }
 
-            const symptomsText = selectedSymptoms + (extraSymptoms ? `, ${extraSymptoms}` : "");
-            const userMessage = "Given in angular brackets are the symptoms of a critical patient who has already called an ambulance. Analyze his symptoms step by step and provide only step by step guidance for first aid. Give your response in the {format Remain CALM, here is the necessary first aid (next line)1. (next line)2.}" + "<" + symptomsText + ">";
+          const symptomsText =
+            selectedSymptoms + (extraSymptoms ? `, ${extraSymptoms}` : "");
+          const userMessage =
+            "Given in angular brackets are the symptoms of a critical patient who has already called an ambulance. Analyze his symptoms step by step and provide only step by step guidance for first aid. Give your response in the {format Remain CALM, here is the necessary first aid (next line)1. (next line)2.}" +
+            "<" +
+            symptomsText +
+            ">";
 
-            try {
-                const response = await fetch(API_URL, {
-                    method: "POST",
-                    headers: { "Content-Type": "application/json" },
-                    body: JSON.stringify({
-                        contents: [{
-                            role: "user",
-                            parts: [{ text: userMessage }]
-                        }]
-                    })
-                });
+          try {
+            const response = await fetch(API_URL, {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify({
+                contents: [
+                  {
+                    role: "user",
+                    parts: [{ text: userMessage }],
+                  },
+                ],
+              }),
+            });
 
-                const data = await response.json();
-                const responseText = data.candidates[0].content.parts[0].text.replace(/\*\*([^*]+)\*\*/g, "$1").trim();
-                
-                document.getElementById("firstAidGuide").innerHTML = responseText.split("\n").map(point => `<p>${point}</p>`).join("");
+            const data = await response.json();
+            const responseText = data.candidates[0].content.parts[0].text
+              .replace(/\*\*([^*]+)\*\*/g, "$1")
+              .trim();
 
-            } catch (error) {
-                console.log(error);
-                alert("Failed to fetch first aid details. Please try again.");
-            }
+            document.getElementById("firstAidGuide").innerHTML = responseText
+              .split("\n")
+              .map((point) => `<p>${point}</p>`)
+              .join("");
+          } catch (error) {
+            console.log(error);
+            alert("Failed to fetch first aid details. Please try again.");
+          }
         });
     </script>
-</body>
+
+    <script
+      async
+      defer
+      src="https://maps.googleapis.com/maps/api/js?key=&callback=initMap"
+    ></script>
+  </body>
 </html>
