@@ -187,6 +187,19 @@
           grid-template-columns: 1fr;
         }
       }
+
+      .ambulance-marker {
+        background-color: #d32f2f;
+        border-radius: 50%;
+        color: white;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 40px;
+        height: 40px;
+        font-size: 24px;
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+      }
     </style>
   </head>
   <body>
@@ -349,7 +362,7 @@
             if (!mapElement) return;
 
             const mapOptions = {
-              center: { lat: -34.397, lng: 150.644 },
+              center: { lat: 28.6823, lng: 77.21 },
               zoom: 12,
               mapId: "DEMO_MAP_ID", // Optional: Add your map ID if you have one
             };
