@@ -1,152 +1,197 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Medical Equipment</title>
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #ffffff;
-            color: #d32f2f;
-            text-align: center;
-            margin: 0;
-            padding: 20px;
-        }
-        .container {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-        }
-        .card {
-            border: 2px solid #d32f2f;
-            border-radius: 10px;
-            padding: 15px;
-            margin: 15px;
-            width: 200px;
-            text-align: center;
-            cursor: pointer;
-            transition: 0.3s;
-            background-color: white;
-        }
-        .card:hover {
-            box-shadow: 0 0 10px #d32f2f;
-        }
-        .product-info, .contact-form {
-            border: 2px solid #d32f2f;
-            border-radius: 10px;
-            padding: 20px;
-            margin-top: 20px;
-            background-color: white;
-            display: none;
-        }
-        .product-image {
-            width: 100px;
-            height: 100px;
-            margin-bottom: 10px;
-        }
-        .button {
-            display: inline-block;  
-            padding: 10px 20px;
-            background-color: #b71c1c;
-            color: white;
-            text-decoration: none; 
-            font-weight: bold; 
-            border-radius: 5px;
-            transition: 0.3s;
-            cursor: pointer;
-        }
-        .button:hover {
-            background-color: #d32f2f;
-        }
-        .contact-form input, .contact-form textarea {
-            width: 100%;
-            margin: 10px 0;
-            padding: 8px;
-            border: 1px solid #d32f2f;
-            border-radius: 5px;
-        }
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #ffffff;
+        color: #d32f2f;
+        text-align: center;
+        margin: 0;
+        padding: 20px;
+      }
+      .container {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+      .card {
+        border: 2px solid #d32f2f;
+        border-radius: 10px;
+        padding: 15px;
+        margin: 15px;
+        width: 200px;
+        text-align: center;
+        cursor: pointer;
+        transition: 0.3s;
+        background-color: white;
+      }
+      .card:hover {
+        box-shadow: 0 0 10px #d32f2f;
+      }
+      .product-info,
+      .contact-form {
+        border: 2px solid #d32f2f;
+        border-radius: 10px;
+        padding: 20px;
+        margin-top: 20px;
+        background-color: white;
+        display: none;
+      }
+      .product-image {
+        width: 100px;
+        height: 100px;
+        margin-bottom: 10px;
+      }
+      .button {
+        display: inline-block;
+        padding: 10px 20px;
+        background-color: #b71c1c;
+        color: white;
+        text-decoration: none;
+        font-weight: bold;
+        border-radius: 5px;
+        transition: 0.3s;
+        cursor: pointer;
+      }
+      .button:hover {
+        background-color: #d32f2f;
+      }
+      .contact-form input,
+      .contact-form textarea {
+        width: 100%;
+        margin: 10px 0;
+        padding: 8px;
+        border: 1px solid #d32f2f;
+        border-radius: 5px;
+      }
     </style>
-</head>
-<body>
+  </head>
+  <body>
     <h1>Medical Equipment</h1>
     <div class="container">
-        <div class="card" onclick="showProduct('Oxygen Cylinder', 'Essential for patients with respiratory issues.', '₹5,000', '₹500/month', 'https://m.media-amazon.com/images/I/41V-s2CDhTS.jpg')">
-            <img src="https://m.media-amazon.com/images/I/41V-s2CDhTS.jpg" alt="Oxygen Cylinder" class="product-image">
-            <h3>Oxygen Cylinder</h3>
-            <p>Buy: ₹5,000 | Rent: ₹500/month</p>
-        </div>
-        <div class="card" onclick="showProduct('Wheelchair', 'Comfortable and durable wheelchair.', '₹8,000', '₹800/month', 'https://m.media-amazon.com/images/I/71D0e-U4vML.jpg')">
-            <img src="https://m.media-amazon.com/images/I/71D0e-U4vML.jpg" alt="Wheelchair" class="product-image">
-            <h3>Wheelchair</h3>
-            <p>Buy: ₹8,000 | Rent: ₹800/month</p>
-        </div>
-        <div class="card" onclick="showProduct('Wheelchair', 'Comfortable and durable wheelchair.', '₹8,000', '₹800/month', 'https://m.media-amazon.com/images/I/71D0e-U4vML.jpg')">
-            <img src="https://m.media-amazon.com/images/I/71D0e-U4vML.jpg" alt="Wheelchair" class="product-image">
-            <h3>Wheelchair</h3>
-            <p>Buy: ₹8,000 | Rent: ₹800/month</p>
-        </div>
-        <div class="card" onclick="showProduct('Wheelchair', 'Comfortable and durable wheelchair.', '₹8,000', '₹800/month', 'https://m.media-amazon.com/images/I/71D0e-U4vML.jpg')">
-            <img src="https://m.media-amazon.com/images/I/71D0e-U4vML.jpg" alt="Wheelchair" class="product-image">
-            <h3>Wheelchair</h3>
-            <p>Buy: ₹8,000 | Rent: ₹800/month</p>
-        </div>
+      <div
+        class="card"
+        onclick="showProduct('Oxygen Cylinder', 'Essential for patients with respiratory issues.', '₹5,000', '₹500/month', 'https://m.media-amazon.com/images/I/41V-s2CDhTS.jpg')"
+      >
+        <img
+          src="https://m.media-amazon.com/images/I/41V-s2CDhTS.jpg"
+          alt="Oxygen Cylinder"
+          class="product-image"
+        />
+        <h3>Oxygen Cylinder</h3>
+        <p>Buy: ₹5,000 | Rent: ₹500/month</p>
+      </div>
+      <div
+        class="card"
+        onclick="showProduct('Wheelchair', 'Comfortable and durable wheelchair.', '₹8,000', '₹800/month', 'https://m.media-amazon.com/images/I/71D0e-U4vML.jpg')"
+      >
+        <img
+          src="https://m.media-amazon.com/images/I/71D0e-U4vML.jpg"
+          alt="Wheelchair"
+          class="product-image"
+        />
+        <h3>Wheelchair</h3>
+        <p>Buy: ₹8,000 | Rent: ₹800/month</p>
+      </div>
+      <div
+        class="card"
+        onclick="showProduct('Wheelchair', 'Comfortable and durable wheelchair.', '₹8,000', '₹800/month', 'https://m.media-amazon.com/images/I/71D0e-U4vML.jpg')"
+      >
+        <img
+          src="https://m.media-amazon.com/images/I/71D0e-U4vML.jpg"
+          alt="Wheelchair"
+          class="product-image"
+        />
+        <h3>Wheelchair</h3>
+        <p>Buy: ₹8,000 | Rent: ₹800/month</p>
+      </div>
+      <div
+        class="card"
+        onclick="showProduct('Wheelchair', 'Comfortable and durable wheelchair.', '₹8,000', '₹800/month', 'https://m.media-amazon.com/images/I/71D0e-U4vML.jpg')"
+      >
+        <img
+          src="https://m.media-amazon.com/images/I/71D0e-U4vML.jpg"
+          alt="Wheelchair"
+          class="product-image"
+        />
+        <h3>Wheelchair</h3>
+        <p>Buy: ₹8,000 | Rent: ₹800/month</p>
+      </div>
     </div>
-    
+
     <div id="productInfo" class="product-info">
-        <h2 id="productName"></h2>
-        <img src="" alt="Product Image" class="product-image" id="productImage">
-        <p id="productDesc"></p>
-        <p id="productPrice"></p>
-        <p id="productRent"></p>
-        <button class="button" onclick="showContactForm('rent')">Request to Rent</button>
-        <button class="button" onclick="showContactForm('buy')">Buy Now</button>
-        <button class="button" onclick="goBack()">Back</button>
+      <h2 id="productName"></h2>
+      <img src="" alt="Product Image" class="product-image" id="productImage" />
+      <p id="productDesc"></p>
+      <p id="productPrice"></p>
+      <p id="productRent"></p>
+      <button class="button" onclick="showContactForm('rent')">
+        Request to Rent
+      </button>
+      <button class="button" onclick="showContactForm('buy')">Buy Now</button>
+      <button class="button" onclick="goBack()">Back</button>
     </div>
 
     <div id="contactForm" class="contact-form">
-        <h2>Enter Your Details</h2>
-        <form id="rentalForm">
-            <input type="text" id="name" placeholder="Your Name" required>
-            <input type="email" id="email" placeholder="Your Email" required>
-            <input type="tel" id="phone" placeholder="Your Phone Number" required>
-            <textarea id="address" placeholder="Your Address" required></textarea>
-            <input type="hidden" id="rentalItem">
-            <input type="hidden" id="purchaseType">
-            <button type="submit" class="button">Submit Request</button>
-            <button type="button" class="button" onclick="goBack()">Cancel</button>
-        </form>
+      <h2>Enter Your Details</h2>
+      <form id="rentalForm">
+        <input type="text" id="name" placeholder="Your Name" required />
+        <input type="email" id="email" placeholder="Your Email" required />
+        <input type="tel" id="phone" placeholder="Your Phone Number" required />
+        <textarea id="address" placeholder="Your Address" required></textarea>
+        <input type="hidden" id="rentalItem" />
+        <input type="hidden" id="purchaseType" />
+        <button type="submit" class="button">Submit Request</button>
+        <button type="button" class="button" onclick="goBack()">Cancel</button>
+      </form>
     </div>
-    
-    <a href="index.html" class="button" style="margin-top: 20px; display: block; width: fit-content; margin-left: auto; margin-right: auto;">Back to Home</a>
+
+    <a
+      href="index.html"
+      class="button"
+      style="
+        margin-top: 20px;
+        display: block;
+        width: fit-content;
+        margin-left: auto;
+        margin-right: auto;
+      "
+      >Back to Home</a
+    >
 
     <script>
-        function showProduct(name, description, price, rent, imageSrc) {
-            document.querySelector('.container').style.display = 'none';
-            document.getElementById('productInfo').style.display = 'block';
-            document.getElementById('productName').innerText = name;
-            document.getElementById('productDesc').innerText = description;
-            document.getElementById('productPrice').innerText = 'Buy: ' + price;
-            document.getElementById('productRent').innerText = 'Rent: ' + rent;
-            document.getElementById('productImage').src = imageSrc;
-            document.getElementById('productImage').alt = name;
-            document.getElementById('rentalItem').value = name;
-        }
-        function goBack() {
-            document.querySelector('.container').style.display = 'flex';
-            document.getElementById('productInfo').style.display = 'none';
-            document.getElementById('contactForm').style.display = 'none';
-        }
-        function showContactForm(type) {
-            document.getElementById('productInfo').style.display = 'none';
-            document.getElementById('contactForm').style.display = 'block';
-            document.getElementById('purchaseType').value = type;
-        }
-        document.getElementById('rentalForm').addEventListener('submit', function(event) {
-            event.preventDefault();
-            alert('Your request has been submitted. We will contact you soon.');
-            goBack();
+      function showProduct(name, description, price, rent, imageSrc) {
+        document.querySelector(".container").style.display = "none";
+        document.getElementById("productInfo").style.display = "block";
+        document.getElementById("productName").innerText = name;
+        document.getElementById("productDesc").innerText = description;
+        document.getElementById("productPrice").innerText = "Buy: " + price;
+        document.getElementById("productRent").innerText = "Rent: " + rent;
+        document.getElementById("productImage").src = imageSrc;
+        document.getElementById("productImage").alt = name;
+        document.getElementById("rentalItem").value = name;
+      }
+      function goBack() {
+        document.querySelector(".container").style.display = "flex";
+        document.getElementById("productInfo").style.display = "none";
+        document.getElementById("contactForm").style.display = "none";
+      }
+      function showContactForm(type) {
+        document.getElementById("productInfo").style.display = "none";
+        document.getElementById("contactForm").style.display = "block";
+        document.getElementById("purchaseType").value = type;
+      }
+      document
+        .getElementById("rentalForm")
+        .addEventListener("submit", function (event) {
+          event.preventDefault();
+          alert("Your request has been submitted. We will contact you soon.");
+          goBack();
         });
     </script>
-</body>
+  </body>
 </html>
