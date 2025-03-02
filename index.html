@@ -46,6 +46,7 @@
         align-items: center;
         padding-top: 50px;
         transition: left 0.3s;
+        z-index: 1000;
       }
       .sidebar a {
         color: white;
@@ -99,6 +100,8 @@
         gap: 10px; /* Spacing between items */
         text-align: left;
         margin: 10px 0;
+        width: 100%;
+        max-width: 600px;
       }
 
       .symptoms-list label {
@@ -110,10 +113,12 @@
         padding: 5px;
         border-radius: 5px;
         cursor: pointer;
+        word-break: break-word;
       }
 
       .symptoms-list input {
         transform: scale(1.2); /* Make checkboxes slightly larger */
+        flex-shrink: 0;
       }
 
       #map {
@@ -122,6 +127,65 @@
         border-radius: 10px;
         margin-top: 15px;
         border: 2px solid #d32f2f;
+      }
+
+      #emergencyPage {
+        width: 90%;
+        max-width: 800px;
+        padding: 20px;
+        box-sizing: border-box;
+        overflow-y: auto;
+        max-height: 90vh;
+      }
+
+      #typing-form {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+
+      #extra-symptoms {
+        width: 100%;
+        max-width: 600px;
+        padding: 8px;
+        margin-top: 5px;
+        border: 1px solid #d32f2f;
+        border-radius: 4px;
+      }
+
+      label {
+        align-self: flex-start;
+        margin-top: 10px;
+      }
+
+      .option {
+        background-color: #d32f2f;
+        color: white;
+        padding: 8px 15px;
+        border: none;
+        cursor: pointer;
+        font-size: 16px;
+        border-radius: 5px;
+        margin-top: 15px;
+        transition: 0.3s;
+      }
+
+      .option:hover {
+        background-color: #b71c1c;
+      }
+
+      /* Make the emergency page responsive */
+      @media (max-width: 768px) {
+        .symptoms-list {
+          grid-template-columns: repeat(2, 1fr);
+        }
+      }
+
+      @media (max-width: 480px) {
+        .symptoms-list {
+          grid-template-columns: 1fr;
+        }
       }
     </style>
   </head>
@@ -183,7 +247,7 @@
         <p>- Apply pressure to bleeding wounds.</p>
         <p>- Do not move injured body parts unnecessarily.</p>
       </div>
-      <h3>🚑 Live Ambulance Tracking</h3>
+      <h3>Live Ambulance Tracking</h3>
       <div id="map"></div>
       <br />
       <button class="option" onclick="goBack()">Back</button>
@@ -198,6 +262,11 @@
         document.querySelector(".plus-sign").style.display = "none";
         document.querySelector("p").style.display = "none";
         document.getElementById("emergencyPage").classList.remove("hidden");
+        // Initialize map when emergency page is shown
+        if (typeof google !== "undefined" && !window.mapInitialized) {
+          initMap();
+          window.mapInitialized = true;
+        }
       }
 
       function goBack() {
@@ -234,7 +303,7 @@
           const symptomsText =
             selectedSymptoms + (extraSymptoms ? `, ${extraSymptoms}` : "");
           const userMessage =
-            "Given in angular brackets are the symptoms of a critical patient who has already called an ambulance. Analyze his symptoms step by step and provide only step by step guidance for first aid. Give your response in the {format Remain CALM, here is the necessary first aid (next line)1. (next line)2.}" +
+            "Given in angular brackets are the symptoms of a critical patient who has already called an ambulance. Analyze his symptoms step by step and provide only step by step guidance for first aid. Give your response in the {format Remain CALM, here is the necessary first aid (next line)1. (next line)2.}" +
             "<" +
             symptomsText +
             ">";
@@ -267,12 +336,82 @@
             alert("Failed to fetch first aid details. Please try again.");
           }
         });
-    </script>
 
-    <script
-      async
-      defer
-      src="https://maps.googleapis.com/maps/api/js?key=&callback=initMap"
-    ></script>
+      // Initialize Google Maps with AdvancedMarkerElement
+      function initMap() {
+        try {
+          // Check if Google Maps API is loaded
+          if (
+            typeof google !== "undefined" &&
+            typeof google.maps !== "undefined"
+          ) {
+            const mapElement = document.getElementById("map");
+            if (!mapElement) return;
+
+            const mapOptions = {
+              center: { lat: -34.397, lng: 150.644 },
+              zoom: 12,
+              mapId: "DEMO_MAP_ID", // Optional: Add your map ID if you have one
+            };
+
+            const map = new google.maps.Map(mapElement, mapOptions);
+
+            // Create an AdvancedMarkerElement instead of the deprecated Marker
+            if (
+              google.maps.marker &&
+              google.maps.marker.AdvancedMarkerElement
+            ) {
+              // Using the recommended AdvancedMarkerElement
+              const ambulancePosition = { lat: -34.397, lng: 150.644 };
+
+              const markerElement = document.createElement("div");
+              markerElement.innerHTML = "🚑";
+              markerElement.style.fontSize = "24px";
+
+              new google.maps.marker.AdvancedMarkerElement({
+                map: map,
+                position: ambulancePosition,
+                title: "Ambulance location",
+                content: markerElement,
+              });
+            } else {
+              // Fallback to standard marker with HTTPS URL
+              new google.maps.Marker({
+                position: { lat: -34.397, lng: 150.644 },
+                map: map,
+                title: "Ambulance location",
+                icon: {
+                  url: "https://maps.google.com/mapfiles/ms/icons/red-dot.png",
+                  scaledSize: new google.maps.Size(40, 40),
+                },
+              });
+            }
+          }
+        } catch (error) {
+          console.error("Error initializing map:", error);
+        }
+      }
+
+      // Load Google Maps API with the proper async attribute
+      function loadGoogleMapsScript() {
+        if (
+          document.querySelector(
+            'script[src*="maps.googleapis.com/maps/api/js"]'
+          )
+        ) {
+          return; // Script already loaded or loading
+        }
+
+        const script = document.createElement("script");
+        script.src =
+          "https://maps.googleapis.com/maps/api/js?key=AIzaSyCeWaUK8e555jbG987fDJ4QITvKuxGwpEo&callback=initMap&loading=async";
+        script.async = true;
+        script.defer = true;
+        document.head.appendChild(script);
+      }
+
+      // Load Google Maps when the page is ready
+      document.addEventListener("DOMContentLoaded", loadGoogleMapsScript);
+    </script>
   </body>
 </html>
