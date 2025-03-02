@@ -68,6 +68,24 @@
         border: 1px solid #d32f2f;
         border-radius: 5px;
       }
+      .loader {
+        border: 5px solid #f3f3f3;
+        border-top: 5px solid #d32f2f;
+        border-radius: 50%;
+        width: 30px;
+        height: 30px;
+        animation: spin 2s linear infinite;
+        margin: 20px auto;
+        display: none;
+      }
+      @keyframes spin {
+        0% {
+          transform: rotate(0deg);
+        }
+        100% {
+          transform: rotate(360deg);
+        }
+      }
     </style>
   </head>
   <body>
@@ -99,27 +117,27 @@
       </div>
       <div
         class="card"
-        onclick="showProduct('Wheelchair', 'Comfortable and durable wheelchair.', '₹8,000', '₹800/month', 'https://m.media-amazon.com/images/I/71D0e-U4vML.jpg')"
+        onclick="showProduct('Hospital Bed', 'Adjustable hospital bed for home care.', '₹15,000', '₹1,500/month', 'https://m.media-amazon.com/images/I/71D0e-U4vML.jpg')"
       >
         <img
           src="https://m.media-amazon.com/images/I/71D0e-U4vML.jpg"
-          alt="Wheelchair"
+          alt="Hospital Bed"
           class="product-image"
         />
-        <h3>Wheelchair</h3>
-        <p>Buy: ₹8,000 | Rent: ₹800/month</p>
+        <h3>Hospital Bed</h3>
+        <p>Buy: ₹15,000 | Rent: ₹1,500/month</p>
       </div>
       <div
         class="card"
-        onclick="showProduct('Wheelchair', 'Comfortable and durable wheelchair.', '₹8,000', '₹800/month', 'https://m.media-amazon.com/images/I/71D0e-U4vML.jpg')"
+        onclick="showProduct('Walker', 'Sturdy walker for mobility assistance.', '₹3,000', '₹300/month', 'https://m.media-amazon.com/images/I/71D0e-U4vML.jpg')"
       >
         <img
           src="https://m.media-amazon.com/images/I/71D0e-U4vML.jpg"
-          alt="Wheelchair"
+          alt="Walker"
           class="product-image"
         />
-        <h3>Wheelchair</h3>
-        <p>Buy: ₹8,000 | Rent: ₹800/month</p>
+        <h3>Walker</h3>
+        <p>Buy: ₹3,000 | Rent: ₹300/month</p>
       </div>
     </div>
 
@@ -145,7 +163,10 @@
         <textarea id="address" placeholder="Your Address" required></textarea>
         <input type="hidden" id="rentalItem" />
         <input type="hidden" id="purchaseType" />
-        <button type="submit" class="button">Submit Request</button>
+        <div id="loader" class="loader"></div>
+        <button type="submit" class="button" id="submitBtn">
+          Submit Request
+        </button>
         <button type="button" class="button" onclick="goBack()">Cancel</button>
       </form>
     </div>
@@ -164,6 +185,10 @@
     >
 
     <script>
+      // Sheet.best API connection URL - REPLACE WITH YOUR OWN URL AFTER SETTING UP
+      const sheetURL =
+        "https://api.sheetbest.com/sheets/9573d2b0-dc53-4fbb-9c2e-09e27bc8a9d8";
+
       function showProduct(name, description, price, rent, imageSrc) {
         document.querySelector(".container").style.display = "none";
         document.getElementById("productInfo").style.display = "block";
@@ -175,22 +200,71 @@
         document.getElementById("productImage").alt = name;
         document.getElementById("rentalItem").value = name;
       }
+
       function goBack() {
         document.querySelector(".container").style.display = "flex";
         document.getElementById("productInfo").style.display = "none";
         document.getElementById("contactForm").style.display = "none";
       }
+
       function showContactForm(type) {
         document.getElementById("productInfo").style.display = "none";
         document.getElementById("contactForm").style.display = "block";
         document.getElementById("purchaseType").value = type;
       }
+
       document
         .getElementById("rentalForm")
         .addEventListener("submit", function (event) {
           event.preventDefault();
-          alert("Your request has been submitted. We will contact you soon.");
-          goBack();
+
+          // Show loading indicator
+          document.getElementById("loader").style.display = "block";
+          document.getElementById("submitBtn").disabled = true;
+
+          // Get form data
+          const formData = {
+            timestamp: new Date().toLocaleString(),
+            name: document.getElementById("name").value,
+            email: document.getElementById("email").value,
+            phone: document.getElementById("phone").value,
+            address: document.getElementById("address").value,
+            product: document.getElementById("rentalItem").value,
+            requestType: document.getElementById("purchaseType").value,
+          };
+
+          // Send data to Sheet.best
+          fetch(sheetURL, {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(formData),
+          })
+            .then((response) => {
+              document.getElementById("loader").style.display = "none";
+              document.getElementById("submitBtn").disabled = false;
+
+              if (response.ok) {
+                alert(
+                  "Your request has been submitted successfully. We will contact you soon."
+                );
+                document.getElementById("rentalForm").reset();
+                goBack();
+              } else {
+                alert(
+                  "There was an error submitting your request. Please try again."
+                );
+              }
+            })
+            .catch((error) => {
+              document.getElementById("loader").style.display = "none";
+              document.getElementById("submitBtn").disabled = false;
+              alert(
+                "There was an error submitting your request. Please try again."
+              );
+              console.error("Error!", error.message);
+            });
         });
     </script>
   </body>
