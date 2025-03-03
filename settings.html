@@ -240,24 +240,20 @@
         });
 
       function saveSettings() {
-        // Display loading state
         const statusEl = document.getElementById("statusMessage");
         statusEl.textContent = "Saving preferences...";
         statusEl.className = "status";
         statusEl.style.display = "block";
 
-        // Get form data
         const form = document.getElementById("settingsForm");
         const formData = new FormData(form);
 
-        // Validate required fields
         if (!formData.get("name").trim()) {
           statusEl.textContent = "Please enter your name";
           statusEl.className = "status error";
           return;
         }
 
-        // Get checkbox values (multiple selections)
         const commPrefs = Array.from(
           document.querySelectorAll('input[name="comm_prefs"]:checked')
         )
@@ -278,11 +274,9 @@
           timestamp: new Date().toISOString(),
         };
 
-        // Your actual Sheets.best API connection URL
         const sheetsApiUrl =
           "https://api.sheetbest.com/sheets/e8ed5c58-6739-46b3-a3de-e30c8fa55c56";
 
-        // Send data to Sheets.best
         fetch(sheetsApiUrl, {
           method: "POST",
           headers: {
@@ -297,7 +291,6 @@
             return response.json();
           })
           .then((data) => {
-            // Success message
             statusEl.textContent = "Preferences saved successfully!";
             statusEl.className = "status success";
 
@@ -307,10 +300,8 @@
           .catch((error) => {
             console.error("Error saving data:", error);
 
-            // If API fails, still save to localStorage as backup
             localStorage.setItem("blitzMedUserPrefs", JSON.stringify(userData));
 
-            // Error message (but noting we saved locally)
             statusEl.textContent =
               "Could not connect to server, but preferences were saved locally.";
             statusEl.className = "status error";
@@ -335,7 +326,6 @@
           document.getElementById("emergency_contact").value =
             prefs.emergency_contact || "";
 
-          // Set communication preferences checkboxes
           if (prefs.communication_preferences) {
             const commPrefs = prefs.communication_preferences.split(", ");
             const checkboxes = document.querySelectorAll(

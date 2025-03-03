@@ -96,8 +96,8 @@
       }
       .symptoms-list {
         display: grid;
-        grid-template-columns: repeat(3, 1fr); /* 3 columns */
-        gap: 10px; /* Spacing between items */
+        grid-template-columns: repeat(3, 1fr);
+        gap: 10px;
         text-align: left;
         margin: 10px 0;
         width: 100%;
@@ -107,9 +107,9 @@
       .symptoms-list label {
         display: flex;
         align-items: center;
-        gap: 5px; /* Space between checkbox and label text */
+        gap: 5px;
         font-size: 16px;
-        background: #f8d7da; /* Light red background */
+        background: #f8d7da;
         padding: 5px;
         border-radius: 5px;
         cursor: pointer;
@@ -117,7 +117,7 @@
       }
 
       .symptoms-list input {
-        transform: scale(1.2); /* Make checkboxes slightly larger */
+        transform: scale(1.2);
         flex-shrink: 0;
       }
 
@@ -175,7 +175,6 @@
         background-color: #b71c1c;
       }
 
-      /* Make the emergency page responsive */
       @media (max-width: 768px) {
         .symptoms-list {
           grid-template-columns: repeat(2, 1fr);
@@ -201,7 +200,6 @@
         box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
       }
 
-      /* New styles for route information */
       .route-info {
         background-color: #f8d7da;
         border: 1px solid #d32f2f;
@@ -259,7 +257,6 @@
         align-self: flex-end;
       }
 
-      /* Added styles for track button */
       .track-btn {
         background-color: #d32f2f;
         color: white;
@@ -387,7 +384,6 @@
       <button class="option" onclick="goBack()">Back</button>
     </div>
     <script>
-      // Global variables for map and markers
       let map;
       let directionsService;
       let directionsRenderer;
@@ -404,7 +400,6 @@
         const sidebar = document.getElementById("sidebar");
         const menuButton = document.querySelector(".menu-button");
 
-        // Check if sidebar is open and the click is not on the sidebar or menu button
         if (
           sidebar.style.left === "0px" &&
           !sidebar.contains(event.target) &&
@@ -418,7 +413,6 @@
         document.querySelector(".plus-sign").style.display = "none";
         document.querySelector("p").style.display = "none";
         document.getElementById("emergencyPage").classList.remove("hidden");
-        // Initialize map when emergency page is shown
         if (typeof google !== "undefined" && !window.mapInitialized) {
           initMap();
           window.mapInitialized = true;
@@ -532,7 +526,6 @@
               },
             });
 
-            // Add patient marker at Hansraj College
             const patientIcon = {
               url: "https://maps.google.com/mapfiles/ms/icons/blue-dot.png",
               scaledSize: new google.maps.Size(40, 40),
@@ -550,7 +543,6 @@
               },
             });
 
-            // Add ambulance marker at Hindu Rao Hospital
             const ambulanceIcon = {
               url: "https://maps.google.com/mapfiles/ms/icons/red-dot.png",
               scaledSize: new google.maps.Size(40, 40),
@@ -648,7 +640,7 @@
             'script[src*="maps.googleapis.com/maps/api/js"]'
           )
         ) {
-          return; // Script already loaded or loading
+          return;
         }
 
         const script = document.createElement("script");

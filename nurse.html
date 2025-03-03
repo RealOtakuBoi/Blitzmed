@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Home Nurse Care - BlitzMed</title>
     <style>
-      /* General Styling */
       body {
         font-family: Arial, sans-serif;
         background-color: #f8f8f8;
@@ -17,7 +16,6 @@
         height: 100vh;
       }
 
-      /* Container */
       .container {
         background: white;
         padding: 20px;
@@ -28,14 +26,12 @@
         max-width: 400px;
       }
 
-      /* Title */
       .title {
         color: #b71c1c;
         font-size: 24px;
         margin-bottom: 15px;
       }
 
-      /* Form Styling */
       .nurse-form {
         display: flex;
         flex-direction: column;
@@ -56,7 +52,6 @@
         width: 100%;
       }
 
-      /* Submit Button */
       .submit-btn {
         background-color: #b71c1c;
         color: white;
@@ -73,7 +68,6 @@
         background-color: #d32f2f;
       }
 
-      /* Back Button */
       .back-btn {
         display: inline-block;
         margin-top: 15px;
@@ -146,14 +140,12 @@
         .addEventListener("submit", function (e) {
           e.preventDefault();
 
-          // Get form values
           const name = document.getElementById("name").value;
           const phone = document.getElementById("phone").value.toString();
           const address = document.getElementById("address").value;
           const careType = document.getElementById("nurse-type").value;
           const startDate = document.getElementById("time").value;
 
-          // Create data object
           const data = {
             Name: name,
             PhoneNo: phone,
