@@ -400,6 +400,20 @@
         sidebar.style.left = sidebar.style.left === "0px" ? "-250px" : "0px";
       }
 
+      document.addEventListener("click", function (event) {
+        const sidebar = document.getElementById("sidebar");
+        const menuButton = document.querySelector(".menu-button");
+
+        // Check if sidebar is open and the click is not on the sidebar or menu button
+        if (
+          sidebar.style.left === "0px" &&
+          !sidebar.contains(event.target) &&
+          event.target !== menuButton
+        ) {
+          sidebar.style.left = "-250px";
+        }
+      });
+
       function showEmergencyPage() {
         document.querySelector(".plus-sign").style.display = "none";
         document.querySelector("p").style.display = "none";
