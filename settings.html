@@ -1,101 +1,330 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>BlitzMed - Settings</title>
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            text-align: center;
-            margin: 0;
-            padding: 0;
-            background-color: #ffffff;
-            color: #d32f2f;
-        }
-        .container {
-            width: 90%;
-            max-width: 400px;
-            margin: 20px auto;
-            padding: 20px;
-            background: #f8f9fa;
-            border-radius: 10px;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-        }
-        h2 {
-            margin-bottom: 20px;
-        }
-        label {
-            display: block;
-            font-weight: bold;
-            margin-top: 10px;
-            text-align: left;
-        }
-        select, input {
-            width: 100%;
-            padding: 8px;
-            margin-top: 5px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-        }
-        button {
-            margin-top: 20px;
-            padding: 10px;
-            width: 100%;
-            background-color: #d32f2f;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 16px;
-            transition: background 0.3s;
-        }
-        button:hover {
-            background-color: #b71c1c;
-        }
-        .back-link {
-            display: block;
-            margin-top: 15px;
-            color: #d32f2f;
-            text-decoration: none;
-            font-weight: bold;
-        }
+      body {
+        font-family: Arial, sans-serif;
+        text-align: center;
+        margin: 0;
+        padding: 0;
+        background-color: #ffffff;
+        color: #d32f2f;
+      }
+      .container {
+        width: 90%;
+        max-width: 600px;
+        margin: 20px auto;
+        padding: 20px;
+        background: #f8f9fa;
+        border-radius: 10px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      }
+      h2 {
+        margin-bottom: 20px;
+      }
+      .form-group {
+        margin-bottom: 15px;
+      }
+      label {
+        display: block;
+        font-weight: bold;
+        margin-top: 10px;
+        text-align: left;
+      }
+      select,
+      input,
+      textarea {
+        width: 100%;
+        padding: 8px;
+        margin-top: 5px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        box-sizing: border-box;
+      }
+      textarea {
+        height: 100px;
+        resize: vertical;
+      }
+      button {
+        margin-top: 20px;
+        padding: 10px;
+        width: 100%;
+        background-color: #d32f2f;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 16px;
+        transition: background 0.3s;
+      }
+      button:hover {
+        background-color: #b71c1c;
+      }
+      .back-link {
+        display: block;
+        margin-top: 15px;
+        color: #d32f2f;
+        text-decoration: none;
+        font-weight: bold;
+      }
+      .status {
+        margin-top: 15px;
+        padding: 10px;
+        border-radius: 5px;
+        display: none;
+      }
+      .success {
+        background-color: #d4edda;
+        color: #155724;
+        border: 1px solid #c3e6cb;
+      }
+      .error {
+        background-color: #f8d7da;
+        color: #721c24;
+        border: 1px solid #f5c6cb;
+      }
+      .checkbox-group {
+        text-align: left;
+        margin-top: 5px;
+      }
+      .checkbox-group label {
+        display: inline-block;
+        font-weight: normal;
+        margin-right: 15px;
+        margin-top: 5px;
+      }
+      .checkbox-group input {
+        width: auto;
+        margin-right: 5px;
+      }
     </style>
-</head>
-<body>
+  </head>
+  <body>
     <div class="container">
-        <h2>Settings & Preferences</h2>
-        
-        <label for="hospital">Preferred Hospital:</label>
-        <select id="hospital">
-            <option value="hospital1">Hospital A</option>
-            <option value="hospital2">Hospital B</option>
-            <option value="hospital3">Hospital C</option>
-        </select>
-        
-        <label for="insurance">Insurance Plan:</label>
-        <select id="insurance">
-            <option value="plan1">Plan 1</option>
-            <option value="plan2">Plan 2</option>
-            <option value="plan3">Plan 3</option>
-        </select>
-        
-        <label for="history">Medical History (Optional):</label>
-        <input type="text" id="history" placeholder="e.g., Diabetes, Hypertension">
-        
-        <button onclick="saveSettings()">Save Preferences</button>
-        
-        <a href="index.html" class="back-link">Back to Home</a>
+      <h2>Settings & Preferences</h2>
+
+      <form id="settingsForm">
+        <div class="form-group">
+          <label for="hospital">Preferred Hospital:</label>
+          <select id="hospital" name="hospital">
+            <option value="">-- Select Hospital --</option>
+            <option value="Hospital A">Hospital A</option>
+            <option value="Hospital B">Hospital B</option>
+            <option value="Hospital C">Hospital C</option>
+            <option value="Hospital D">Hospital D</option>
+            <option value="Hospital E">Hospital E</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="doctor">Preferred Primary Care Doctor:</label>
+          <select id="doctor" name="doctor">
+            <option value="">-- Select Doctor --</option>
+            <option value="Dr. Smith">Dr. Smith</option>
+            <option value="Dr. Johnson">Dr. Johnson</option>
+            <option value="Dr. Williams">Dr. Williams</option>
+            <option value="Dr. Brown">Dr. Brown</option>
+            <option value="Dr. Miller">Dr. Miller</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="insurance">Insurance Plan:</label>
+          <select id="insurance" name="insurance">
+            <option value="">-- Select Insurance --</option>
+            <option value="Medicare">Medicare</option>
+            <option value="Medicaid">Medicaid</option>
+            <option value="Blue Cross">Blue Cross Blue Shield</option>
+            <option value="UnitedHealthcare">UnitedHealthcare</option>
+            <option value="Aetna">Aetna</option>
+            <option value="Cigna">Cigna</option>
+            <option value="Kaiser">Kaiser Permanente</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="pharmacy">Preferred Pharmacy:</label>
+          <select id="pharmacy" name="pharmacy">
+            <option value="">-- Select Pharmacy --</option>
+            <option value="CVS">CVS Pharmacy</option>
+            <option value="Walgreens">Walgreens</option>
+            <option value="Rite Aid">Rite Aid</option>
+            <option value="Walmart">Walmart Pharmacy</option>
+            <option value="Hospital Pharmacy">Hospital Pharmacy</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label>Communication Preferences:</label>
+          <div class="checkbox-group">
+            <label
+              ><input type="checkbox" name="comm_prefs" value="email" />
+              Email</label
+            >
+            <label
+              ><input type="checkbox" name="comm_prefs" value="sms" />
+              SMS/Text</label
+            >
+            <label
+              ><input type="checkbox" name="comm_prefs" value="phone" /> Phone
+              Call</label
+            >
+            <label
+              ><input type="checkbox" name="comm_prefs" value="app" /> App
+              Notification</label
+            >
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="history">Medical History (Optional):</label>
+          <textarea
+            id="history"
+            name="history"
+            placeholder="e.g., Diabetes, Hypertension, Previous surgeries"
+          ></textarea>
+        </div>
+
+        <div class="form-group">
+          <label for="allergies">Allergies (Optional):</label>
+          <input
+            type="text"
+            id="allergies"
+            name="allergies"
+            placeholder="e.g., Penicillin, Latex, Nuts"
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="emergency_contact">Emergency Contact:</label>
+          <input
+            type="text"
+            id="emergency_contact"
+            name="emergency_contact"
+            placeholder="Name and phone number"
+          />
+        </div>
+
+        <button type="submit">Save Preferences</button>
+      </form>
+
+      <div id="statusMessage" class="status"></div>
+
+      <a href="index.html" class="back-link">Back to Home</a>
     </div>
-    
+
     <script>
-        function saveSettings() {
-            const hospital = document.getElementById('hospital').value;
-            const insurance = document.getElementById('insurance').value;
-            const history = document.getElementById('history').value;
-            
-            alert('Preferences Saved!\nHospital: ' + hospital + '\nInsurance: ' + insurance + '\nMedical History: ' + history);
+      document
+        .getElementById("settingsForm")
+        .addEventListener("submit", function (e) {
+          e.preventDefault();
+          saveSettings();
+        });
+
+      function saveSettings() {
+        // Display loading state
+        const statusEl = document.getElementById("statusMessage");
+        statusEl.textContent = "Saving preferences...";
+        statusEl.className = "status";
+        statusEl.style.display = "block";
+
+        // Get form data
+        const form = document.getElementById("settingsForm");
+        const formData = new FormData(form);
+
+        // Get checkbox values (multiple selections)
+        const commPrefs = Array.from(
+          document.querySelectorAll('input[name="comm_prefs"]:checked')
+        )
+          .map((el) => el.value)
+          .join(", ");
+
+        // Create data object for API
+        const userData = {
+          hospital: formData.get("hospital"),
+          doctor: formData.get("doctor"),
+          insurance: formData.get("insurance"),
+          pharmacy: formData.get("pharmacy"),
+          communication_preferences: commPrefs,
+          medical_history: formData.get("history"),
+          allergies: formData.get("allergies"),
+          emergency_contact: formData.get("emergency_contact"),
+          timestamp: new Date().toISOString(),
+        };
+
+        // Your actual Sheets.best API connection URL
+        const sheetsApiUrl =
+          "https://api.sheetbest.com/sheets/e8ed5c58-6739-46b3-a3de-e30c8fa55c56";
+
+        // Send data to Sheets.best
+        fetch(sheetsApiUrl, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(userData),
+        })
+          .then((response) => {
+            if (!response.ok) {
+              throw new Error("Network response was not ok");
+            }
+            return response.json();
+          })
+          .then((data) => {
+            // Success message
+            statusEl.textContent = "Preferences saved successfully!";
+            statusEl.className = "status success";
+
+            // Optional: Store in localStorage for quick access
+            localStorage.setItem("blitzMedUserPrefs", JSON.stringify(userData));
+          })
+          .catch((error) => {
+            console.error("Error saving data:", error);
+
+            // If API fails, still save to localStorage as backup
+            localStorage.setItem("blitzMedUserPrefs", JSON.stringify(userData));
+
+            // Error message (but noting we saved locally)
+            statusEl.textContent =
+              "Could not connect to server, but preferences were saved locally.";
+            statusEl.className = "status error";
+          });
+      }
+
+      // Load saved preferences if available (on page load)
+      document.addEventListener("DOMContentLoaded", function () {
+        const savedPrefs = localStorage.getItem("blitzMedUserPrefs");
+        if (savedPrefs) {
+          const prefs = JSON.parse(savedPrefs);
+
+          // Set form values from saved preferences
+          document.getElementById("hospital").value = prefs.hospital || "";
+          document.getElementById("doctor").value = prefs.doctor || "";
+          document.getElementById("insurance").value = prefs.insurance || "";
+          document.getElementById("pharmacy").value = prefs.pharmacy || "";
+          document.getElementById("history").value =
+            prefs.medical_history || "";
+          document.getElementById("allergies").value = prefs.allergies || "";
+          document.getElementById("emergency_contact").value =
+            prefs.emergency_contact || "";
+
+          // Set communication preferences checkboxes
+          if (prefs.communication_preferences) {
+            const commPrefs = prefs.communication_preferences.split(", ");
+            const checkboxes = document.querySelectorAll(
+              'input[name="comm_prefs"]'
+            );
+            checkboxes.forEach((cb) => {
+              if (commPrefs.includes(cb.value)) {
+                cb.checked = true;
+              }
+            });
+          }
         }
+      });
     </script>
-</body>
+  </body>
 </html>
