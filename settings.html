@@ -100,6 +100,10 @@
         width: auto;
         margin-right: 5px;
       }
+      .required:after {
+        content: " *";
+        color: #d32f2f;
+      }
     </style>
   </head>
   <body>
@@ -107,6 +111,17 @@
       <h2>Settings & Preferences</h2>
 
       <form id="settingsForm">
+        <div class="form-group">
+          <label for="name" class="required">Patient Name:</label>
+          <input
+            type="text"
+            id="name"
+            name="name"
+            placeholder="Full Name"
+            required
+          />
+        </div>
+
         <div class="form-group">
           <label for="hospital">Preferred Hospital:</label>
           <select id="hospital" name="hospital">
@@ -235,6 +250,13 @@
         const form = document.getElementById("settingsForm");
         const formData = new FormData(form);
 
+        // Validate required fields
+        if (!formData.get("name").trim()) {
+          statusEl.textContent = "Please enter your name";
+          statusEl.className = "status error";
+          return;
+        }
+
         // Get checkbox values (multiple selections)
         const commPrefs = Array.from(
           document.querySelectorAll('input[name="comm_prefs"]:checked')
@@ -244,6 +266,7 @@
 
         // Create data object for API
         const userData = {
+          name: formData.get("name"),
           hospital: formData.get("hospital"),
           doctor: formData.get("doctor"),
           insurance: formData.get("insurance"),
@@ -301,6 +324,7 @@
           const prefs = JSON.parse(savedPrefs);
 
           // Set form values from saved preferences
+          document.getElementById("name").value = prefs.name || "";
           document.getElementById("hospital").value = prefs.hospital || "";
           document.getElementById("doctor").value = prefs.doctor || "";
           document.getElementById("insurance").value = prefs.insurance || "";
